@@ -10,6 +10,7 @@
 				<ul class="flex gap-4 items-center">
 					<li><NuxtLink to="/">Home</NuxtLink></li>
 					<li><NuxtLink to="/about">About</NuxtLink></li>
+					<li><NuxtLink to="/tasks">Tasks</NuxtLink></li>
 					<li>
 						<NuxtLink
 							to="/products"
