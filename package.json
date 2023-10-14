@@ -16,6 +16,11 @@
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
-    "firebase": "^10.3.0"
+    "@pinia/nuxt": "^0.5.0",
+    "firebase": "^10.3.0",
+    "pinia": "^2.1.7"
+  },
+  "overrides": {
+    "vue": "latest"
   }
 }

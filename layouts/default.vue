@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<header class="shadow-sm bg-white">
+		<header class="shadow-sm bg-[#fff4e3]">
 			<nav class="container mx-auto p-4 flex justify-between">
 				<NuxtLink
 					to="/"
@@ -29,6 +29,6 @@
 
 <style scoped>
 .router-link-exact-active {
-	color: #12b488;
+	color: #581b98;
 }
 </style>
