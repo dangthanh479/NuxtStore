@@ -12,6 +12,10 @@
 </template>
 
 <script setup>
+definePageMeta({
+	layout: 'products',
+});
+
 const { productId } = useRoute().params;
 const uri = 'https://fakestoreapi.com/products/' + productId;
 
@@ -21,8 +25,4 @@ const { data: product } = await useFetch(uri, { key: productId });
 if (!product.value) {
 	throw createError({ statusCode: 404, statusMessage: 'Product not found' });
 }
-
-definePageMeta({
-	layout: 'products',
-});
 </script>

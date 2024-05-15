@@ -2,9 +2,7 @@
 	<div
 		class="absolute inset-0 w-1/2 h-1/2 mx-auto my-auto bg-gray-500 p-5 rounded-lg flex items-center justify-center flex-col">
 		<p class="mb-4 font-bold uppercase">Edit Task popup</p>
-		<form
-			@submit.prevent="addTask"
-			class="">
+		<div>
 			<div>
 				<div class="mb-5">
 					<input
@@ -22,53 +20,36 @@
 			<div class="flex justify-center mt-5">
 				<button
 					@click="editTask"
-					type="submit"
 					class="btn mr-3">
 					Submit
 				</button>
 				<button
-					type="submit"
 					class="btn bg-red-500"
 					@click="closePopup">
 					Close
 				</button>
 			</div>
-		</form>
+		</div>
 		<p
-			v-if="error"
+			v-if="errorMessage"
 			class="text-red-400">
-			Pls enter name + description
+			{{ errorMessage }}
 		</p>
 	</div>
 </template>
 
 <script setup>
-import { db } from '../composables/firebase';
-import { doc, updateDoc } from 'firebase/firestore';
+const props = defineProps(['data', 'isOpen', 'errors']);
+const emit = defineEmits(['close', 'submit']);
 
-const props = defineProps(['data']);
-const emit = defineEmits(['close']);
-const error = ref(false);
-
-const task = ref({
-	name: 'init name',
-	description: 'init description',
-	createdDate: new Date(),
+const errorMessage = computed(() => {
+	return props.errors;
 });
 
-onMounted(() => {
-	task.value = { ...props.data };
-});
+const task = ref(props.data ?? null);
 
 const editTask = async () => {
-	if (Object.values(task.value).some((value) => value === '')) {
-		error.value = true;
-		return;
-	} else {
-		error.value = false;
-		await updateDoc(doc(db, 'tasks', props.data.id), task.value);
-		window.location.reload();
-	}
+	emit('submit', task.value);
 };
 
 const closePopup = () => {

@@ -1,68 +1,86 @@
 <template>
-	<div class="mb-4 font-bold uppercase">Create new tasks</div>
-	<form
-		@submit.prevent="addTask"
-		class="mb-10">
-		<input
-			type="text"
-			placeholder="name"
-			v-model="formData.name" />
-		<input
-			type="text"
-			placeholder="description"
-			v-model="formData.description" />
-		<button
-			type="submit"
-			class="btn">
-			Submit
-		</button>
-		<p
-			v-if="error"
-			class="text-red-600">
-			Pls enter name + description
-		</p>
-	</form>
-	<div class="mb-4 font-bold uppercase">All tasks</div>
-	<div
-		v-for="task in allTasks"
-		:key="task.id">
+	<div>
+		<div class="mb-4 font-bold uppercase">Create new tasks</div>
+		<form
+			@submit.prevent="addTask"
+			class="mb-10">
+			<div class="mb-4 flex items-center">
+				<label
+					for="name"
+					class="w-24"
+					>Name:</label
+				>
+				<input
+					type="text"
+					id="name"
+					class="border border-green-500 px-2 py-1 focus:outline-none focus:border-green-700 focus:ring-1 focus:border-green-700"
+					placeholder="name"
+					v-model="formData.name" />
+			</div>
+			<div class="flex items-center">
+				<label
+					for="description"
+					class="w-24"
+					>Description:</label
+				>
+				<input
+					type="text"
+					class="border border-green-500 px-2 py-1 focus:outline-none focus:border-green-700 focus:ring-1 focus:border-green-700"
+					id="description"
+					placeholder="description"
+					v-model="formData.description" />
+			</div>
+			<div class="flex">
+				<div class="w-24"></div>
+				<button
+					type="submit"
+					class="btn mt-4">
+					Submit
+				</button>
+			</div>
+			<p
+				v-if="error"
+				class="text-red-600">
+				{{ error }}
+			</p>
+		</form>
+		<div class="mb-4 font-bold uppercase">All tasks</div>
 		<div
-			class="bg-gray-300 p-5 rounded-lg mb-3 flex items-center justify-between">
-			<div>Name: {{ task.name }} - description: {{ task.description }}</div>
-			<div>
-				<div
-					class="btn mr-4"
-					@click="openPopupEdit(task)">
-					Edit
-				</div>
-				<div
-					class="btn bg-red-500"
-					@click="removeTask(task.id)">
-					Remove
+			v-for="task in allTasks"
+			:key="task.id">
+			<div
+				class="bg-gray-300 p-5 rounded-lg mb-3 flex items-center justify-between">
+				<div>Name: {{ task.name }} - description: {{ task.description }}</div>
+				<div>
+					<div
+						class="btn mr-4"
+						@click="openPopupEdit(task)">
+						Edit
+					</div>
+					<div
+						class="btn bg-red-500"
+						@click="removeTask(task.id)">
+						Remove
+					</div>
 				</div>
 			</div>
 		</div>
+		<EditTaskPopup
+			v-if="isOpenPopup"
+			:data="data"
+			:is-open="isOpenPopup"
+			:errors="error"
+			@submit="handleSubmit"
+			@close="handleCloseEditPopup" />
 	</div>
-	<EditTaskPopup
-		v-if="isOpenPopup"
-		@close="isOpenPopup = false"
-		:data="data" />
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
-import { db } from './../../composables/firebase';
-import {
-	collection,
-	getDocs,
-	addDoc,
-	orderBy,
-	query,
-	deleteDoc,
-	doc,
-} from 'firebase/firestore';
+import { useTasksStore } from '../../stores/tasksStore';
 
-const allTasks = ref([]);
+const tasksStore = useTasksStore();
+const response = await tasksStore.getAllTasks();
+const allTasks = ref(response);
 const data = ref({});
 const formData = ref({
 	name: '',
@@ -70,16 +88,16 @@ const formData = ref({
 	createdDate: new Date(),
 });
 const isOpenPopup = ref(false);
-const error = ref(false);
+const error = ref('');
 
 const addTask = async () => {
 	if (Object.values(formData.value).some((value) => value === '')) {
-		error.value = true;
+		error.value = 'Name & Description is required';
 		return;
 	} else {
 		error.value = false;
-		await addDoc(collection(db, 'tasks'), formData.value);
-		window.location.reload();
+		await tasksStore.addTask(formData.value);
+		getAllTask();
 	}
 };
 
@@ -88,19 +106,30 @@ const openPopupEdit = (task) => {
 	isOpenPopup.value = true;
 };
 
-const removeTask = async (id) => {
-	await deleteDoc(doc(db, 'tasks', id));
-	window.location.reload();
+const handleSubmit = async (taskData) => {
+	if (Object.values(taskData).some((value) => value === '')) {
+		error.value = 'Name & Description is required';
+		return;
+	} else {
+		error.value = '';
+		await tasksStore.editTask(taskData.id, taskData);
+		getAllTask();
+		isOpenPopup.value = false;
+	}
 };
 
-onMounted(async () => {
-	let tasks = await getDocs(
-		query(collection(db, 'tasks'), orderBy('createdDate')),
-	);
-	tasks.forEach((task) => {
-		allTasks.value.push({ ...task.data(), id: task.id });
-	});
-});
-</script>
+const handleCloseEditPopup = async () => {
+	error.value = '';
+	isOpenPopup.value = false;
+};
 
-<style lang="scss" scoped></style>
+const removeTask = async (id) => {
+	await tasksStore.deleteTaskById(id);
+	getAllTask();
+};
+
+const getAllTask = async () => {
+	await tasksStore.getAllTasks();
+	allTasks.value = tasksStore.tasks;
+};
+</script>

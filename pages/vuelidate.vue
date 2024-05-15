@@ -1,34 +1,36 @@
 <template>
 	<div>
 		<form @submit.prevent="submitForm">
-			<Comp1
-				:name="'name'"
-				:label="'Name'"
-				:type="'text'"
-				:formData="formData"
-				:errorsRef="errorsRef"
-				:rules="rules" />
-			<Comp1
-				:name="'address'"
-				:label="'address'"
-				:type="'text'"
-				:formData="formData"
-				:errorsRef="errorsRef"
-				:rules="rules" />
-			<Comp1
-				:name="'phone'"
-				:label="'phone'"
-				:type="'text'"
-				:formData="formData"
-				:errorsRef="errorsRef"
-				:rules="rules" />
-			<Comp1
-				:name="'email'"
-				:label="'email'"
-				:type="'text'"
-				:formData="formData"
-				:errorsRef="errorsRef"
-				:rules="rules" />
+			<div>
+				<label for="phone">Account</label>
+				<input
+					id="account"
+					v-model="formData.account"
+					type="text"
+					name="account" />
+			</div>
+			<div>
+				<span
+					v-if="isError('account', errorsRef)"
+					style="color: #fd5c70; font-size: 12px">
+					{{ getErrorMessage('account', errorsRef) }}
+				</span>
+			</div>
+			<div>
+				<label for="phone">Password</label>
+				<input
+					id="password"
+					v-model="formData.password"
+					type="text"
+					name="password" />
+			</div>
+			<div>
+				<span
+					v-if="isError('password', errorsRef)"
+					style="color: #fd5c70; font-size: 12px">
+					{{ getErrorMessage('password', errorsRef) }}
+				</span>
+			</div>
 			<button type="submit">Submit</button>
 		</form>
 	</div>
@@ -38,27 +40,22 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required, helpers } from '@vuelidate/validators';
 
+const mode = 'login';
 const errorsRef = reactive([]);
 const formData = ref({
-	name: '',
-	address: '',
+	account: '',
+	password: '',
 	email: '',
 	phone: '',
 });
 
 const rules = computed(() => {
 	return {
-		name: {
-			required: helpers.withMessage('The name field is required', required),
+		account: {
+			required: helpers.withMessage('The account field is required', required),
 		},
-		address: {
-			required: helpers.withMessage('The address field is required', required),
-		},
-		email: {
-			required: helpers.withMessage('The email field is required', required),
-		},
-		phone: {
-			required: helpers.withMessage('The phone field is required', required),
+		password: {
+			required: helpers.withMessage('The password field is required', required),
 		},
 	};
 });
@@ -71,11 +68,46 @@ const submitForm = async () => {
 	if (v$.value.$error) {
 		const errors = JSON.parse(JSON.stringify(v$.value.$errors));
 		errorsRef.value = [...errors];
-		console.log(errorsRef.value);
-		console.log(formData.value);
 	} else {
-		console.log(formData.value);
-		console.log('OK');
+		const body = {
+			username: formData.value.account,
+			password: formData.value.password,
+			phonenumber: 123,
+		};
+
+		if (mode === 'register') {
+			await register(body);
+		} else {
+			await login(body);
+		}
+	}
+};
+
+const register = async (body) => {
+	try {
+		await useFetch('http://localhost:3001/api/v1/register', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body),
+		});
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+const login = async (body) => {
+	try {
+		await useFetch('http://localhost:3001/api/v1/login', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(body),
+		});
+	} catch (e) {
+		console.log(e);
 	}
 };
 </script>
