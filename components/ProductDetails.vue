@@ -11,7 +11,9 @@
 				<p class="text-xl my-7">Price - ${{ product.price }}</p>
 				<h3 class="font-bold border-b-2 mb-4 pb-2">Product description:</h3>
 				<p class="mb-7">{{ product.description }}</p>
-				<button class="btn flex">
+				<button
+					class="btn flex"
+					@click="addItemToCart">
 					<i class="material-icons mr-2">add_shopping_cart</i>
 					<span>Add to cart</span>
 				</button>
@@ -21,7 +23,14 @@
 </template>
 
 <script setup>
+import { useCartStore } from '../stores/cartStore';
+
 const { product } = defineProps(['product']);
+const cartStore = useCartStore();
+
+const addItemToCart = () => {
+	cartStore.addItemToCart(product);
+};
 </script>
 
 <style scoped>

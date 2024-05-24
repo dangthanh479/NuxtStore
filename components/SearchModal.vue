@@ -5,11 +5,10 @@
 		</div>
 		<form
 			@submit.prevent="submitForm"
-			:class="{ active: props.isOpenSearch }"
+			:class="{ active: props.isOpenModal }"
 			@click.stop=""
 			class="searchForm flex flex-col items-center justify-center bg-[#fff4e3]">
-			<div
-				class="mb-5">
+			<div class="mb-5">
 				<input
 					v-model="searchForm.name"
 					type="text"
@@ -47,7 +46,7 @@ import { useUserStore } from '~~/stores/userStore';
 const userStore = useUserStore();
 
 const props = defineProps({
-	isOpenSearch: {
+	isOpenModal: {
 		type: Boolean,
 		default: false,
 	},
