@@ -1,7 +1,7 @@
 <template>
 	<div class="select-none">
 		<div @click="handleOpenSearchForm">
-			<i class="fa-solid fa-magnifying-glass"></i>
+			<i class="fa-solid fa-magnifying-glass cursor-pointer"></i>
 		</div>
 		<form
 			@submit.prevent="submitForm"

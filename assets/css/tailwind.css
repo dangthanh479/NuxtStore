@@ -13,4 +13,13 @@ body {
 	.card {
 		@apply p-3 rounded-md bg-white shadow-md h-full;
 	}
+	.btn-checkout {
+		@apply btn px-16 py-4 rounded-3xl font-bold
+	}
+	.divider {
+		@apply border-t border-gray-300
+	}
+	.cart-notification {
+		@apply absolute bottom-[-5px] right-[-8px] bg-[#12b488] text-white rounded-full h-4 w-4 flex items-center justify-center text-xs cursor-pointer
+	}
 }

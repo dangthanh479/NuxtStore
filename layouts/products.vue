@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="min-h-screen flex flex-col justify-between">
 		<div
 			v-if="isShowWrapper"
 			@click="handleWrapperClick"
@@ -24,12 +24,12 @@
 					<!-- <li>
 						<NuxtLink to="/search-result">Result</NuxtLink>
 					</li> -->
-					<li class="cursor-pointer">
+					<li>
 						<SearchModal
 							:isOpenModal="isOpenSearch"
 							@click="toggleModal('search')" />
 					</li>
-					<li class="cursor-pointer">
+					<li>
 						<CartModal
 							:isOpenModal="isOpenCart"
 							@click="toggleModal('cart')" />
@@ -41,17 +41,7 @@
 			<slot />
 		</div>
 		<footer class="container mx-auto p-4 flex justify-between border-t-2">
-			<ul class="flex gap-4 items-center">
-				<li><NuxtLink to="/">Home</NuxtLink></li>
-				<li><NuxtLink to="/about">About</NuxtLink></li>
-				<li>
-					<NuxtLink
-						to="/products"
-						class="btn"
-						>Store</NuxtLink
-					>
-				</li>
-			</ul>
+			© 2023 NuxtStore. All rights reserved.
 		</footer>
 	</div>
 </template>
