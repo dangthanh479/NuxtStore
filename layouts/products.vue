@@ -8,29 +8,45 @@
 			<nav class="container mx-auto flex justify-between">
 				<NuxtLink
 					to="/"
-					class="font-bold"
-					>Nuxt Store</NuxtLink
+					class="font-extrabold text-2xl cursor-pointer"
+					>AnyStore</NuxtLink
 				>
 				<ul class="flex gap-4 items-center">
-					<li><NuxtLink to="/">Home</NuxtLink></li>
-					<li><NuxtLink to="/about">About</NuxtLink></li>
 					<li>
 						<NuxtLink
-							to="/products"
-							class="btn"
-							>Store</NuxtLink
+							class="router-link"
+							to="/"
+							>Home</NuxtLink
 						>
 					</li>
-					<!-- <li>
-						<NuxtLink to="/search-result">Result</NuxtLink>
-					</li> -->
 					<li>
-						<SearchModal
+						<NuxtLink
+							class="router-link"
+							to="/about"
+							>About</NuxtLink
+						>
+					</li>
+					<li>
+						<NuxtLink
+							class="router-link"
+							to="/products"
+							>Shop</NuxtLink
+						>
+					</li>
+				</ul>
+				<ul class="flex gap-4 items-center">
+					<li>
+						<NavModalSearch
 							:isOpenModal="isOpenSearch"
 							@click="toggleModal('search')" />
 					</li>
 					<li>
-						<CartModal
+						<NavModalWishList
+							:isOpenModal="isOpenWishList"
+							@click="toggleModal('wishlist')" />
+					</li>
+					<li>
+						<NavModalCart
 							:isOpenModal="isOpenCart"
 							@click="toggleModal('cart')" />
 					</li>
@@ -41,34 +57,41 @@
 			<slot />
 		</div>
 		<footer class="container mx-auto p-4 flex justify-between border-t-2">
-			© 2023 NuxtStore. All rights reserved.
+			© 2023 AnyStore. All rights reserved.
 		</footer>
 	</div>
 </template>
 
 <script setup>
+import NavModalCart from '~/components/NavModalCart.vue';
+import NavModalSearch from '~/components/NavModalSearch.vue';
+import NavModalWishList from '~/components/NavModalWishList.vue';
+
 const isOpenSearch = ref(false);
+const isOpenWishList = ref(false);
 const isOpenCart = ref(false);
 const isShowWrapper = ref(false);
 
+const modalStates = {
+	search: isOpenSearch,
+	wishlist: isOpenWishList,
+	cart: isOpenCart,
+};
+
 const toggleModal = (modal) => {
-	if (modal === 'search') {
-		isOpenSearch.value = !isOpenSearch.value;
-		if (isOpenSearch.value) {
-			isOpenCart.value = false;
+	Object.keys(modalStates).forEach((key) => {
+		if (key !== modal) {
+			modalStates[key].value = false;
 		}
-	} else if (modal === 'cart') {
-		isOpenCart.value = !isOpenCart.value;
-		if (isOpenCart.value) {
-			isOpenSearch.value = false;
-		}
-	}
-	isShowWrapper.value = isOpenSearch.value || isOpenCart.value;
+	});
+	modalStates[modal].value = !modalStates[modal].value;
+	isShowWrapper.value = Object.values(modalStates).some((state) => state.value);
 };
 
 const handleWrapperClick = () => {
-	isOpenSearch.value = false;
-	isOpenCart.value = false;
+	Object.values(modalStates).forEach((state) => {
+		state.value = false;
+	});
 	isShowWrapper.value = false;
 };
 </script>
@@ -76,10 +99,14 @@ const handleWrapperClick = () => {
 <style scoped>
 .wrapper {
 	position: absolute;
+	content: ' ';
+	top: 0;
+	left: 0;
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 }
 .router-link-exact-active {
 	color: #581b98;
+	font-weight: 600;
 }
 </style>

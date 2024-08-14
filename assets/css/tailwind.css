@@ -3,10 +3,17 @@
 @tailwind utilities;
 
 body {
-	@apply bg-gray-50;
+	@apply bg-[#F6F1EB];
 }
 
 @layer components {
+	.dancing-font {
+		font-family: "Dancing Script", cursive;
+		font-optical-sizing: auto;
+	}
+	.click-link {
+		@apply underline underline-offset-8 hover:no-underline
+	}
 	.btn {
 		@apply bg-[#12b488] text-white px-3 py-2 rounded-md text-sm text-white inline-block select-none hover:bg-[#071a52] ease-in-out duration-300;
 	}
@@ -21,5 +28,8 @@ body {
 	}
 	.cart-notification {
 		@apply absolute bottom-[-5px] right-[-8px] bg-[#12b488] text-white rounded-full h-4 w-4 flex items-center justify-center text-xs cursor-pointer
+	}
+	.router-link {
+		@apply hover:text-[#581b98] duration-300 ease-linear
 	}
 }

@@ -1,0 +1,19 @@
+{
+  "general": {
+    "viewAll": "View All",
+    "discover": "Discover"
+  },
+  "banner": {
+    "banner1Title": "The New Year Collection",
+    "banner1Description": "Our latest collection is here. Discover the latest trends and styles for the new year.",
+    "banner2Title": "Exclusive Spring Deals",
+    "banner2Description": "Refresh your wardrobe with our spring collection. Enjoy special discounts on selected items.",
+    "banner3Title": "Summer Essentials",
+    "banner3Description": "Get ready for summer with our must-have essentials. Stay stylish in the heat.",
+    "banner4Title": "Autumn Arrivals",
+    "banner4Description": "Explore our new autumn collection. Embrace the season with the latest in fashion."
+  },
+  "shop": {
+    "shopByCategory": "Shop by Category"
+  }
+}

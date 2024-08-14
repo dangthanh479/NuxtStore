@@ -71,7 +71,7 @@ const submitForm = async () => {
 	userStore.userSearch = { ...searchForm.value };
 	emit('closeSearch');
 	resetForm(searchForm);
-	if (!(path === '/search-result')) {
+	if (path !== '/search-result') {
 		await useRouter().push({ path: '/search-result' });
 	}
 };

@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Head>
-			<Title>Nuxt Store | {{ product.title }}</Title>
+			<Title>AnyStore | {{ product.title }}</Title>
 			<Meta
 				name="description"
 				:content="product.description" />

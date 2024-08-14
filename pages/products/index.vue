@@ -33,8 +33,8 @@ definePageMeta({
 const { data: products } = await useFetch('https://fakestoreapi.com/products');
 
 useHead({
-	title: 'Nuxt Store | Products List',
-	meta: [{ name: 'description', content: 'Nuxt Store' }],
+	title: 'AnyStore | Products List',
+	meta: [{ name: 'description', content: 'AnyStore' }],
 });
 
 const formData = ref({
@@ -63,7 +63,6 @@ const submitForm = () => {
 				category: '',
 				description: '',
 			};
-			console.log(json);
 		});
 };
 </script>

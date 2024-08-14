@@ -26,6 +26,7 @@
 								<div class="w-20 mr-4">
 									<img
 										:src="`${item.image}`"
+										alt=""
 										class="h-16 w-16" />
 								</div>
 								<div class="flex-1 text-left mr-4">

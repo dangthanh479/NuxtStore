@@ -1,0 +1,20 @@
+{
+  "homePage": {
+    "general": {
+      "viewAll": "View All"
+    },
+    "banner": {
+      "banner1Title": "Bộ Sưu Tập Năm Mới",
+      "banner1Description": "Bộ sưu tập mới nhất của chúng tôi đã có mặt. Khám phá những xu hướng và phong cách mới cho năm mới.",
+      "banner2Title": "Ưu Đãi Độc Quyền Mùa Xuân",
+      "banner2Description": "Làm mới tủ đồ của bạn với bộ sưu tập mùa xuân của chúng tôi. Tận hưởng ưu đãi đặc biệt cho các mặt hàng được chọn.",
+      "banner3Title": "Sản Phẩm Mùa Hè Cần Có",
+      "banner3Description": "Chuẩn bị cho mùa hè với những sản phẩm cần có. Giữ phong cách ngay cả trong cái nóng.",
+      "banner4Title": "Hàng Mới Mùa Thu",
+      "banner4Description": "Khám phá bộ sưu tập mùa thu mới của chúng tôi. Đón nhận mùa với những phong cách mới nhất."
+    },
+    "shop": {
+      "shopByCategory": "Shop by Category"
+    }
+  }
+}

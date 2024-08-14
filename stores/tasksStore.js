@@ -33,7 +33,7 @@ export const useTasksStore = defineStore("tasksStore", {
         });
         return this.tasks;
       } catch (e) {
-        console.log("catch", e);
+        //
       }
     },
     async addTask(task) {
@@ -41,7 +41,7 @@ export const useTasksStore = defineStore("tasksStore", {
         const response = await addDoc(collection(db, "tasks"), task);
         return response;
       } catch (e) {
-        console.log(e);
+        //
       }
     },
     async editTask(id, newTask) {
@@ -49,7 +49,7 @@ export const useTasksStore = defineStore("tasksStore", {
         const response = await updateDoc(doc(db, "tasks", id), newTask);
         return response;
       } catch (e) {
-        console.log(e);
+        //
       }
     },
     async deleteTaskById(id) {

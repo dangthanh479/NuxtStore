@@ -14,7 +14,7 @@ export const useCartStore = defineStore("cartStore", {
 
         return response.data.value;
       } catch (e) {
-        console.log("catch", e);
+        //
       }
     },
     addItemToCart(product) {

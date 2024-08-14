@@ -9,18 +9,29 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@eslint/js": "^9.4.0",
     "@nuxt/devtools": "latest",
+    "@nuxt/image": "^1.7.0",
+    "@nuxtjs/device": "^3.1.1",
+    "@nuxtjs/i18n": "^8.3.3",
     "@nuxtjs/tailwindcss": "^6.8.0",
     "@types/node": "^18.17.3",
-    "nuxt": "^3.6.5"
+    "eslint": "^9.4.0",
+    "eslint-plugin-vue": "^9.26.0",
+    "globals": "^15.4.0",
+    "nuxt": "^3.6.5",
+    "sass": "^1.77.8"
   },
   "dependencies": {
+    "@nuxt/icon": "^1.4.5",
     "@nuxtjs/axios": "^5.13.6",
     "@pinia/nuxt": "^0.5.0",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "firebase": "^10.3.0",
-    "pinia": "^2.1.7"
+    "pinia": "^2.1.7",
+    "ua-parser-js": "^1.0.38",
+    "vue3-carousel": "^0.3.3"
   },
   "overrides": {
     "vue": "latest"

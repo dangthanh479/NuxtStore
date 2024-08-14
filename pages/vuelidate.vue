@@ -93,7 +93,7 @@ const register = async (body) => {
 			body: JSON.stringify(body),
 		});
 	} catch (e) {
-		console.log(e);
+		//
 	}
 };
 
@@ -107,7 +107,7 @@ const login = async (body) => {
 			body: JSON.stringify(body),
 		});
 	} catch (e) {
-		console.log(e);
+		//
 	}
 };
 </script>
