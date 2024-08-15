@@ -39,8 +39,11 @@
 				</ul>
 			</nav>
 		</header>
-		<div class="container mx-auto p-4">
+		<div>
 			<slot />
+		</div>
+		<div class="w-full bg-[#fff]">
+			<LazyGeneralAppFooter class="container mx-auto p-4" />
 		</div>
 	</div>
 </template>

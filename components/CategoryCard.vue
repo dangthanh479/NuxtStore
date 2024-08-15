@@ -1,14 +1,3 @@
-<script setup lang="ts">
-const { fallbackImage } = useHelpers();
-const props = defineProps({
-	node: { type: Object, required: true },
-	imageLoading: { type: String as PropType<'lazy' | 'eager'>, default: 'lazy' },
-});
-
-const imgWidth = 220;
-const imgHeight = Math.round(imgWidth * 1.125);
-</script>
-
 <template>
 	<NuxtLink
 		v-if="node"
@@ -32,6 +21,17 @@ const imgHeight = Math.round(imgWidth * 1.125);
 			v-html="node.name" />
 	</NuxtLink>
 </template>
+
+<script setup lang="ts">
+const { fallbackImage } = useHelpers();
+const props = defineProps({
+	node: { type: Object, required: true },
+	imageLoading: { type: String as PropType<'lazy' | 'eager'>, default: 'lazy' },
+});
+
+const imgWidth = 220;
+const imgHeight = Math.round(imgWidth * 1.125);
+</script>
 
 <style scoped>
 .item {

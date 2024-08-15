@@ -2,9 +2,9 @@
 	<section class="my-36">
 		<div class="flex flex-col items-center">
 			<div class="dancing-font text-4xl font-bold mb-4">
-				Happily ever anchor
+				{{ $t('general.section1') }}
 			</div>
-			<div class="mb-4">Choose products based on your preferences.</div>
+			<div class="mb-4">{{ $t('general.section1Description') }}</div>
 			<div>
 				<NuxtLink
 					class="click-link"

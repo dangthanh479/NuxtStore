@@ -45,7 +45,7 @@ import image5 from '@/assets/images/5.jpg';
 
 const { t } = useI18n();
 
-const bannerItems = ref([
+const bannerItems = computed(() => [
 	{
 		id: 1,
 		link: image2,

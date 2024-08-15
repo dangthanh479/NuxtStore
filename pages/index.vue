@@ -1,8 +1,10 @@
 <template>
 	<div>
-		<BannerSlide />
-		<BrandLogo />
-		<SectionCategories />
+		<LazyBannerSlide class="container mx-auto p-4" />
+		<LazyBrandLogo class="container mx-auto p-4" />
+		<LazyHomeSectionCategories class="container mx-auto p-4" />
+		<LazyHomeSectionTrendingNow class="container mx-auto p-4" />
+		<LazyHomeSectionAllProducts />
 	</div>
 </template>
 

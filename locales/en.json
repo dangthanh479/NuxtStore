@@ -1,7 +1,17 @@
 {
   "general": {
+    "appDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis id eligendi accusamus omnis harum earum hic ut consequatur ratione! Aspernatur sint nam molestiae et eaque consequatur hic debitis inventore minus id, reiciendis ratione labore magnam animi, maiores asperiores sed optio in nulla? Ad, cum iste! Eum consectetur, maxime.",
     "viewAll": "View All",
-    "discover": "Discover"
+    "discover": "Discover",
+    "explore": "Explore",
+    "section1": "Happily ever anchor",
+    "section1Description": "Choose products based on your preferences.",
+    "section2": "Go where only winds are going",
+    "section2Description": "TOP new products this week.",
+    "section3": "Trending Now",
+    "section3Description": "Curated collections of out most in-demand styles",
+    "customerService": "Customer Service",
+    "newsletter": "Newsletter"
   },
   "banner": {
     "banner1Title": "The New Year Collection",
@@ -14,6 +24,14 @@
     "banner4Description": "Explore our new autumn collection. Embrace the season with the latest in fashion."
   },
   "shop": {
-    "shopByCategory": "Shop by Category"
+    "shopNow": "Shop now",
+    "shopByCategory": "Shop by Category",
+    "newArrivals": "New Arrivals",
+    "giftCards": "Gift Cards",
+    "orderHistory": "Order History",
+    "wishlist": "Wishlist"
+  },
+  "account": {
+    "myAccount": "My Account"
   }
 }

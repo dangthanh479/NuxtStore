@@ -1,20 +1,37 @@
 {
-  "homePage": {
-    "general": {
-      "viewAll": "View All"
-    },
-    "banner": {
-      "banner1Title": "Bộ Sưu Tập Năm Mới",
-      "banner1Description": "Bộ sưu tập mới nhất của chúng tôi đã có mặt. Khám phá những xu hướng và phong cách mới cho năm mới.",
-      "banner2Title": "Ưu Đãi Độc Quyền Mùa Xuân",
-      "banner2Description": "Làm mới tủ đồ của bạn với bộ sưu tập mùa xuân của chúng tôi. Tận hưởng ưu đãi đặc biệt cho các mặt hàng được chọn.",
-      "banner3Title": "Sản Phẩm Mùa Hè Cần Có",
-      "banner3Description": "Chuẩn bị cho mùa hè với những sản phẩm cần có. Giữ phong cách ngay cả trong cái nóng.",
-      "banner4Title": "Hàng Mới Mùa Thu",
-      "banner4Description": "Khám phá bộ sưu tập mùa thu mới của chúng tôi. Đón nhận mùa với những phong cách mới nhất."
-    },
-    "shop": {
-      "shopByCategory": "Shop by Category"
-    }
+  "general": {
+    "appDescription": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis id eligendi accusamus omnis harum earum hic ut consequatur ratione! Aspernatur sint nam molestiae et eaque consequatur hic debitis inventore minus id, reiciendis ratione labore magnam animi, maiores asperiores sed optio in nulla? Ad, cum iste! Eum consectetur, maxime.",
+    "viewAll": "View All",
+    "discover": "Khám phá",
+    "explore": "Khám phá",
+    "section1": "Mỏ neo hạnh phúc mãi mãi",
+    "section1Description": "Chọn sản phẩm theo sở thích của bạn.",
+    "section2": "Hãy đi đến nơi chỉ có gió thổi",
+    "section2Description": "TOP sản phẩm mới nhất tuần này.",
+    "section3": "Trending Now",
+    "section3Description": "curated collections of out most in-demand styles",
+    "customerService": "Customer Service",
+    "newsletter": "Newsletter"
+  },
+  "banner": {
+    "banner1Title": "Bộ Sưu Tập Năm Mới",
+    "banner1Description": "Bộ sưu tập mới nhất của chúng tôi đã có mặt. Khám phá những xu hướng và phong cách mới cho năm mới.",
+    "banner2Title": "Ưu Đãi Độc Quyền Mùa Xuân",
+    "banner2Description": "Làm mới tủ đồ của bạn với bộ sưu tập mùa xuân của chúng tôi. Tận hưởng ưu đãi đặc biệt cho các mặt hàng được chọn.",
+    "banner3Title": "Sản Phẩm Mùa Hè Cần Có",
+    "banner3Description": "Chuẩn bị cho mùa hè với những sản phẩm cần có. Giữ phong cách ngay cả trong cái nóng.",
+    "banner4Title": "Hàng Mới Mùa Thu",
+    "banner4Description": "Khám phá bộ sưu tập mùa thu mới của chúng tôi. Đón nhận mùa với những phong cách mới nhất."
+  },
+  "shop": {
+    "shopNow": "Mua ngay",
+    "shopByCategory": "Shop by Category",
+    "newArrivals": "New Arrivals",
+    "giftCards": "Gift Cards",
+    "orderHistory": "Order History",
+    "wishlist": "Wishlist"
+  },
+  "account": {
+    "myAccount": "My Account"
   }
 }

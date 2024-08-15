@@ -4,6 +4,7 @@
 			<div class="p-7">
 				<img
 					:src="`${product.image}`"
+					alt="product detail"
 					class="mx-auto my-7" />
 			</div>
 			<div class="p-7">

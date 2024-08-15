@@ -9,7 +9,13 @@ export default defineNuxtConfig({
         "@nuxt/image"
     ],
 	i18n: {
-		vueI18n: './i18n.config.js'
+		locales: [
+      { code: 'en', file: 'en.json', name: 'English' },
+      { code: 'vn', file: 'vn.json', name: 'VietNam' },
+		],
+		langDir: 'locales/',
+    defaultLocale: 'en',
+		strategy: 'no_prefix',
 	},
 	app: {
 		head: {
