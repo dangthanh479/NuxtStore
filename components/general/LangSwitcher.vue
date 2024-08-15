@@ -13,7 +13,6 @@
 
 <script setup>
 const { locales, locale, setLocaleCookie } = useI18n();
-console.log(locale, locales, 1111);
 watch(locale, (newLocale) => {
 	if (newLocale) setLocaleCookie(newLocale);
 });

@@ -1,5 +1,5 @@
 <template>
-	<main class="container">
+	<main class="container mx-auto p-4">
 		<div
 			v-if="productCategories && productCategories.length"
 			class="grid grid-cols-2 gap-4 my-6 md:grid-cols-3 lg:gap-8 xl:grid-cols-3">
