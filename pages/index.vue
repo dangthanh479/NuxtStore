@@ -12,12 +12,6 @@
 definePageMeta({
 	middleware: 'check-user-agent',
 });
-const { data: users } = await useFetch('/api/users', {
-	method: 'POST',
-	body: {
-		itemType: '11',
-	},
-});
 </script>
 
 <style lang="scss" scoped>
