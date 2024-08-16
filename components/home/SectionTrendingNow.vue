@@ -19,8 +19,7 @@
 			<NuxtImg
 				class="object-cover w-full h-80 col-span-2"
 				src="/images/section3.jpg"
-				alt="section3"
-				loading="" />
+				alt="section3" />
 		</div>
 	</section>
 </template>

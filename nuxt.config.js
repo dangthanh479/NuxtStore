@@ -6,7 +6,7 @@ export default defineNuxtConfig({
         '@nuxtjs/tailwindcss',
         '@pinia/nuxt',
         '@nuxtjs/device',
-        "@nuxt/image"
+				"@nuxt/image",
     ],
 	i18n: {
 		locales: [

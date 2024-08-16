@@ -110,7 +110,7 @@
 						>{{ $t('shop.orderHistory') }}</NuxtLink
 					>
 					<NuxtLink
-						:to="wishlistLink"
+						:to="'/'"
 						class="py-1.5 block"
 						>{{ $t('shop.wishlist') }}</NuxtLink
 					>
@@ -138,7 +138,6 @@
 					>
 				</p>
 			</div>
-			<SocialIcons class="ml-auto" />
 		</div>
 	</footer>
 </template>

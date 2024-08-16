@@ -1,6 +1,6 @@
 <template>
 	<section class="my-36">
-		<div class="flex flex-col items-center">
+		<div class="flex flex-col items-center text-center">
 			<div class="dancing-font text-4xl font-bold mb-4">
 				{{ $t('general.section1') }}
 			</div>

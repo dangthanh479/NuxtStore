@@ -1,7 +1,17 @@
 export function useHelpers() {
-  const fallbackImage = '/images/placeholder.jpg';
+  const isShowingMobileMenu = useState<boolean>(
+    "isShowingMobileMenu",
+    () => false
+  );
+  const fallbackImage = "/images/placeholder.jpg";
+
+  function toggleMobileMenu(state: boolean | undefined = undefined) {
+    isShowingMobileMenu.value = state ?? !isShowingMobileMenu.value;
+  }
 
   return {
-    fallbackImage
-  }
+    isShowingMobileMenu,
+    fallbackImage,
+    toggleMobileMenu,
+  };
 }

@@ -11,7 +11,14 @@
     "section3": "Trending Now",
     "section3Description": "Curated collections of out most in-demand styles",
     "customerService": "Customer Service",
-    "newsletter": "Newsletter"
+    "newsletter": "Newsletter",
+    "home": "Home",
+    "allProducts": "All Products",
+    "contact": "Contact",
+    "menu": "Menu",
+    "myDetails": "My Details",
+    "downloads": "Downloads",
+    "please": "Please"
   },
   "banner": {
     "banner1Title": "The New Year Collection",
@@ -29,9 +36,34 @@
     "newArrivals": "New Arrivals",
     "giftCards": "Gift Cards",
     "orderHistory": "Order History",
-    "wishlist": "Wishlist"
+    "wishlist": "Wishlist",
+    "category": "Category",
+    "order": "Order"
   },
   "account": {
-    "myAccount": "My Account"
+    "myAccount": "My Account",
+    "logout": "Log out",
+    "accountLogin": "log in",
+    "hasAccount": "Already have an account?",
+    "accountRegister": "Sign up",
+    "noAccount": "Don't have an account?",
+    "enterEmailOrUsernameForReset": "Please enter your email address or username and we will send you a link to reset your password.",
+    "forgotPassword": "Forgot password",
+    "backToLogin": "Back To Login",
+    "loggingIn": "Logging In",
+    "accountCreated": "Account Created",
+    "ifRegistered": "If Registered",
+    "loginToAccount": "Log in to your account",
+    "login": "Login",
+    "register": "Register",
+    "sendPasswordResetEmail": "Send Password Reset Email",
+    "emailOrUsername": "Email or Username",
+    "username": "username",
+    "password": "Password",
+    "email": "email"
+  },
+  "error": {
+    "invalidUsername": "Invalid Username",
+    "incorrectPassword": "Incorrect Password"
   }
 }

@@ -4,7 +4,7 @@
 		<LazyBrandLogo class="container mx-auto p-4" />
 		<LazyHomeSectionCategories class="container mx-auto p-4" />
 		<LazyHomeSectionTrendingNow class="container mx-auto p-4" />
-		<LazyHomeSectionAllProducts />
+		<LazyHomeSectionNewProducts />
 	</div>
 </template>
 
