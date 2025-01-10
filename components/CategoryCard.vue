@@ -7,10 +7,10 @@
 			:width="imgWidth"
 			:height="imgHeight"
 			class="absolute inset-0 object-cover w-full h-full"
-			:src="node.image?.sourceUrl || fallbackImage"
+			:src="node.image?.sourceUrl || node.image || fallbackImage"
 			:alt="node.image?.altText || node.name"
 			:title="node.image?.title || node.name"
-			:loading="imageLoading"
+			:loading="props.imageLoading"
 			:sizes="`${imgWidth / 2}px md:${imgWidth}px`" />
 		<div
 			class="absolute inset-x-0 bottom-0 opacity-50 bg-gradient-to-t from-black to-transparent h-1/2" />

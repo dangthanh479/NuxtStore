@@ -106,7 +106,7 @@
 	</div>
 </template>
 
-<script lang="ts" setup>
+<script setup>
 const { logoutUser, viewer, customer, avatar } = useAuth();
 const { cart } = useCart();
 const route = useRoute();

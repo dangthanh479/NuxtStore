@@ -25,12 +25,16 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "@pinia/nuxt": "^0.5.0",
+    "@vee-validate/i18n": "^4.13.2",
+    "@vee-validate/rules": "^4.13.2",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.4",
     "firebase": "^10.3.0",
     "pinia": "^2.1.7",
     "ua-parser-js": "^1.0.38",
-    "vue3-carousel": "^0.3.3"
+    "vee-validate": "^4.13.2",
+    "vue3-carousel": "^0.3.3",
+    "yup": "^1.4.0"
   },
   "overrides": {
     "vue": "latest"

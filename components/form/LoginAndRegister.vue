@@ -12,7 +12,6 @@
 					<template #fallback>Loading...</template>
 				</ClientOnly>
 			</h1>
-
 			<div
 				v-if="formView === 'login'"
 				class="my-2 text-center">
@@ -29,35 +28,32 @@
 			<div
 				v-if="formView === 'register'"
 				class="my-2 text-center">
-				{{ $t('account.hasAccount') }}
-				<a
-					class="font-semibold cursor-pointer text-primary"
-					@click="navigate('login')">
-					{{ $t('general.please') }}
-					{{ $t('account.accountLogin') }}
-				</a>
-				.
-			</div>
-		</div>
-
-		<form
-			class="mt-6"
-			@submit.prevent="handleFormSubmit()">
-			<label
-				v-if="formView === 'register' || formView === 'forgotPassword'"
-				for="email">
 				<ClientOnly>
-					{{ emailLabel }} <span class="text-red-500">*</span> <br />
+					{{ $t('account.hasAccount') }}
+					<a
+						class="font-semibold cursor-pointer text-primary"
+						@click="navigate('login')">
+						{{ $t('general.please') }}
+						{{ $t('account.accountLogin') }}.
+					</a>
 					<template #fallback>Loading...</template>
 				</ClientOnly>
-				<input
-					id="email"
-					v-model="userInfo.email"
-					:placeholder="inputPlaceholder.email"
-					autocomplete="email"
-					type="text"
-					required />
-			</label>
+			</div>
+		</div>
+		<Form
+			:validateOnInput="false"
+			class="mt-6"
+			@submit="handleFormSubmit()">
+			<FormInputValidate
+				v-if="formView === 'register' || formView === 'forgotPassword'"
+				id="email"
+				name="email"
+				v-model="userInfo.email"
+				:placeholder="inputPlaceholder.email"
+				:label="emailLabel"
+				required
+				type="text"
+				rules="required|email" />
 			<p
 				v-if="formView === 'forgotPassword'"
 				class="text-sm text-gray-500">
@@ -67,36 +63,27 @@
 				</ClientOnly>
 			</p>
 			<div v-if="formView !== 'forgotPassword'">
-				<label for="username">
-					<ClientOnly>
-						{{ usernameLabel }}
-						<template #fallback>Loading...</template>
-					</ClientOnly>
-					<span class="text-red-500">*</span> <br />
-					<input
-						id="username"
-						v-model="userInfo.username"
-						:placeholder="inputPlaceholder.username"
-						autocomplete="username"
-						type="text"
-						required />
-				</label>
-				<label for="password">
-					<ClientOnly>
-						{{ passwordLabel }} <span class="text-red-500">*</span> <br />
-						<template #fallback>Loading...</template>
-					</ClientOnly>
-
-					<FormPasswordInput
-						id="password"
-						className="border rounded-lg w-full p-3 px-4 bg-white"
-						v-model="userInfo.password"
-						:placeholder="inputPlaceholder.password"
-						:autocomplete="
-							formView === 'login' ? 'current-password' : 'new-password'
-						"
-						:required="true" />
-				</label>
+				<FormInputValidate
+					id="username"
+					name="username"
+					v-model="userInfo.username"
+					:placeholder="inputPlaceholder.username"
+					:label="usernameLabel"
+					required
+					type="text"
+					rules="required" />
+				<FormInputPassword
+					id="password"
+					name="password"
+					className="border rounded-lg w-full p-3 px-4 bg-white"
+					v-model="userInfo.password"
+					:label="passwordLabel"
+					:placeholder="inputPlaceholder.password"
+					:autocomplete="
+						formView === 'login' ? 'current-password' : 'new-password'
+					"
+					rules="required"
+					required />
 			</div>
 			<Transition
 				name="scale-y"
@@ -127,12 +114,11 @@
 					</ClientOnly>
 				</span>
 			</button>
-		</form>
+		</Form>
 		<div
 			class="my-8 text-center cursor-pointer"
 			@click="navigate('forgotPassword')"
-			v-if="formView === 'login'"
-			v-cloak>
+			v-if="formView === 'login'">
 			<ClientOnly>
 				{{ $t('account.forgotPassword') }}
 				<template #fallback>Loading...</template>
@@ -141,8 +127,7 @@
 		<div
 			class="my-8 text-center cursor-pointer"
 			@click="navigate('login')"
-			v-if="formView === 'forgotPassword'"
-			v-cloak>
+			v-if="formView === 'forgotPassword'">
 			<ClientOnly>
 				{{ $t('account.backToLogin') }}
 				<template #fallback>Loading...</template>
@@ -151,7 +136,9 @@
 	</div>
 </template>
 
-<script setup lang="ts">
+<script setup>
+import { Form } from 'vee-validate';
+
 const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
@@ -171,21 +158,37 @@ const updateFormView = () => {
 		formView.value = 'login';
 	}
 };
+
 watch(route, updateFormView, { immediate: true });
 
 const login = () => {
 	//
 };
 
-const handleFormSubmit = () => {
-	//
+const handleFormSubmit = async () => {
+	console.log(userInfo.value);
+	return;
+	if (formView.value === 'register') {
+		const { success, error } = await registerUser(userInfo.value);
+		if (success) {
+			errorMessage.value = '';
+			message.value =
+				t('account.accountCreated') + ' ' + t('account.loggingIn');
+			resetForm();
+			setTimeout(() => {
+				login(userInfo);
+			}, 2000);
+		} else {
+			errorMessage.value = error;
+		}
+	}
 };
 
 const resetPassword = () => {
 	//
 };
 
-const navigate = (view: string) => {
+const navigate = (view) => {
 	formView.value = view;
 	if (view === 'forgotPassword') {
 		router.push({ query: { action: 'forgotPassword' } });
@@ -240,13 +243,9 @@ const inputPlaceholder = computed(() => {
 <style scoped>
 input,
 button {
-	@apply border rounded-lg mb-4 w-full p-3 px-4 bg-white;
+	@apply border rounded-lg w-full p-3 px-4 bg-white;
 }
-
 form button {
 	@apply rounded-lg font-bold bg-gray-800 text-white py-3 px-8 hover:bg-gray-800;
-}
-[v-cloak] {
-	display: none;
 }
 </style>

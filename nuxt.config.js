@@ -7,11 +7,28 @@ export default defineNuxtConfig({
         '@pinia/nuxt',
         '@nuxtjs/device',
 				"@nuxt/image",
-    ],
+	],
+	postcss: {
+    plugins: {
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
+	runtimeConfig: {
+		public: {
+			apiBaseUrl: process.env.NUXT_PUBLIC_API_BASE_URL,
+			apiBaseUrl1: 'http://localhost:8080/api',
+			useMock: process.env.NUXT_PUBLIC_USE_MOCK,
+		},
+	},
+	plugins: [
+		'~/plugins/vee-validate.js',
+		'~/plugins/api-handler.js',
+	],
 	i18n: {
 		locales: [
       { code: 'en', file: 'en.json', name: 'English' },
-      { code: 'vn', file: 'vn.json', name: 'VietNam' },
+      { code: 'vi', file: 'vi.json', name: 'VietNam' },
 		],
 		langDir: 'locales/',
     defaultLocale: 'en',

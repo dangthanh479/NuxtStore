@@ -8,11 +8,20 @@ body {
 
 @layer components {
 	.dancing-font {
-		font-family: "Dancing Script", cursive;
+		font-family: 'Dancing Script', cursive;
 		font-optical-sizing: auto;
 	}
+	.text-primary {
+		@apply text-[#581b98];
+	}
+	.bg-primary {
+		@apply bg-[#12b488];
+	}
+	.border-primary {
+		@apply border-gray-300;
+	}
 	.click-link {
-		@apply underline underline-offset-8 hover:no-underline
+		@apply underline underline-offset-8 hover:no-underline;
 	}
 	.btn {
 		@apply bg-[#12b488] text-white px-3 py-2 rounded-md text-sm text-white inline-block select-none hover:bg-[#071a52] ease-in-out duration-300;
@@ -21,16 +30,16 @@ body {
 		@apply p-3 rounded-md bg-white shadow-md h-full;
 	}
 	.btn-checkout {
-		@apply btn px-16 py-4 rounded-3xl font-bold
+		@apply btn px-16 py-4 rounded-3xl font-bold;
 	}
 	.divider {
-		@apply border-t border-gray-300
+		@apply border-t border-gray-300;
 	}
 	.cart-notification {
-		@apply absolute bottom-[-5px] right-[-8px] bg-[#12b488] text-white rounded-full h-4 w-4 flex items-center justify-center text-xs cursor-pointer
+		@apply absolute bottom-[-5px] right-[-8px] bg-[#12b488] text-white rounded-full h-4 w-4 flex items-center justify-center text-xs cursor-pointer;
 	}
 	.router-link {
-		@apply hover:text-[#581b98] duration-300 ease-linear
+		@apply hover:text-primary duration-300 ease-linear;
 	}
 	select {
 		@apply bg-white border rounded-md font-medium border-gray-300 flex-1 text-sm p-1.5 pr-12 pl-4 text-gray-500 relative inline-flex items-center hover:bg-gray-50 focus:z-20 py-2 px-4 appearance-none;
@@ -39,18 +48,43 @@ body {
 		background-size: 1rem;
 		padding-right: 2.5rem;
 	}
-	.avatar {
-		.account-dropdown {
-			@apply absolute gap-2 top-6 -right-2  z-50 p-2 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-700 hidden;
-
-		a,
-		button {
-			@apply flex gap-2 items-center p-2 rounded whitespace-nowrap min-w-[200px];
-		}
+	.avatar .account-dropdown {
+		@apply absolute gap-2 top-6 -right-2 z-50 p-2 bg-white border border-gray-200 rounded-lg shadow-lg text-sm text-gray-700 hidden;
 	}
-
-	&:hover .account-dropdown {
+	.avatar .account-dropdown a,
+	.avatar .account-dropdown button {
+		@apply flex gap-2 items-center p-2 rounded whitespace-nowrap min-w-[200px];
+	}
+	.avatar:hover .account-dropdown {
 		@apply grid;
 	}
-}
+	.product-grid {
+		@apply my-4 min-h-[600px] grid transition-all gap-8 lg:my-8;
+
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.product-card img {
+		@apply rounded-lg object-top object-cover w-full;
+		aspect-ratio: 1/1.125;
+	}
+	.product-card:hover h2 {
+		@apply text-primary;
+	}
+	.prev,
+	.next,
+	.page-number {
+		@apply bg-white border font-medium border-gray-300 text-sm p-2 text-gray-500 relative inline-flex items-center hover:bg-gray-50 focus:z-10;
+	}
+	.prev {
+		@apply rounded-l-md;
+	}
+	.next {
+		@apply rounded-r-md;
+	}
+	.page-number {
+		@apply px-3;
+	}
+	.page-number[aria-current='page'] {
+		@apply bg-primary border-primary border bg-opacity-10 text-primary z-10;
+	}
 }

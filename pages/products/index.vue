@@ -1,68 +1,51 @@
 <template>
 	<div>
-		<div class="mt-[1000px]">
-			<p class="font-bold text-gray-500 m-4">Add more products</p>
-			<div>
-				<ProductForm v-model="formData" />
-				<button
-					class="btn mt-5"
-					type="submit"
-					@click="submitForm">
-					Submit
-				</button>
-			</div>
-		</div>
+		<ProductResultCount />
 		<div>
 			<p class="font-bold text-gray-500 m-4 mt-20">Products List</p>
 		</div>
-		<div class="grid grid-cols-4 gap-5">
-			<div v-for="product in products">
-				<ProductCard :product="product" />
-			</div>
-		</div>
+		<ProductGrid />
 	</div>
 </template>
 
 <script setup>
-import axios from 'axios';
-
 definePageMeta({
 	layout: 'products',
 });
 
-const { data: products } = await useFetch('https://fakestoreapi.com/products');
+const { $apiHandler } = useNuxtApp();
+const { setProducts } = useProducts();
+const route = useRoute();
+
+const data = await $apiHandler({
+	method: 'GET',
+	path: `products`,
+});
+setProducts(data.value);
+
+watch(
+  () => route.query,
+  async (newVal) => {
+		if (route.name === 'products') {
+			try {
+        const queryParams = new URLSearchParams(newVal).toString(); // Convert query object to query string
+        const apiUrl = `products?${queryParams}`; // Append query string to path
+        const newData = await $apiHandler({
+          method: 'GET',
+          path: apiUrl, // Use constructed URL with query params
+				});
+        setProducts(newData.value);
+      } catch (error) {
+        console.error("Failed to fetch products:", error);
+      }
+    }
+  },
+  { immediate: true }
+);
+
 
 useHead({
 	title: 'AnyStore | Products List',
 	meta: [{ name: 'description', content: 'AnyStore' }],
 });
-
-const formData = ref({
-	title: '',
-	price: '',
-	category: '',
-	description: '',
-});
-
-const submitForm = () => {
-	axios
-		.post(
-			'https://fakestoreapi.com/products',
-			JSON.stringify({
-				title: formData.title,
-				price: formData.price,
-				description: formData.description,
-				image: '',
-				category: formData.category,
-			}),
-		)
-		.then((json) => {
-			formData.value = {
-				title: '',
-				price: '',
-				category: '',
-				description: '',
-			};
-		});
-};
 </script>

@@ -28,8 +28,11 @@
 </template>
 
 <script setup>
-const { data: getAllProductCategories } = await useFetch(
-	'/api/getAllCategories',
-);
-const productCategories = getAllProductCategories.value.data || [];
+const { $apiHandler } = useNuxtApp();
+
+const getAllProductCategories = await $apiHandler({
+	method: 'GET',
+	path: 'categories',
+});
+const productCategories = getAllProductCategories.value || [];
 </script>

@@ -15,4 +15,3 @@ export default defineEventHandler(async (event) => {
   const useMock = process.env.USE_MOCK === 'true';
   return await handleRequest(method, useMock);
 });
-  

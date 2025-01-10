@@ -93,7 +93,6 @@ const error = ref('');
 const addTask = async () => {
 	if (Object.values(formData.value).some((value) => value === '')) {
 		error.value = 'Name & Description is required';
-		return;
 	} else {
 		error.value = false;
 		await tasksStore.addTask(formData.value);

@@ -16,7 +16,7 @@
 useHead({
 	title: `Categories`,
 	meta: [{ name: 'description', content: 'All product categories' }],
-	link: [{ rel: 'canonical', href: 'https://v3.woonuxt.com/categories' }],
+	link: [{ rel: 'canonical', href: '' }],
 });
 
 const { data: getAllProductCategories } = await useFetch(

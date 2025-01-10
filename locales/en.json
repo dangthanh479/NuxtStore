@@ -38,7 +38,14 @@
     "orderHistory": "Order History",
     "wishlist": "Wishlist",
     "category": "Category",
-    "order": "Order"
+    "order": "Order",
+    "cart": "Cart",
+    "checkout": "Checkout",
+    "cartEmpty": "Your cart is empty.",
+    "addProductsInYourCart": "Please, add some products to your cart.",
+    "browseOurProducts": "Browse our products",
+    "onSale": "On Sale",
+    "sale": "Sale"
   },
   "account": {
     "myAccount": "My Account",
@@ -49,21 +56,23 @@
     "noAccount": "Don't have an account?",
     "enterEmailOrUsernameForReset": "Please enter your email address or username and we will send you a link to reset your password.",
     "forgotPassword": "Forgot password",
-    "backToLogin": "Back To Login",
-    "loggingIn": "Logging In",
-    "accountCreated": "Account Created",
-    "ifRegistered": "If Registered",
+    "backToLogin": "Back to login",
+    "ifRegistered": "If your email address is registered with us, you will receive an email with a link to reset your password.",
     "loginToAccount": "Log in to your account",
     "login": "Login",
     "register": "Register",
-    "sendPasswordResetEmail": "Send Password Reset Email",
+    "sendPasswordResetEmail": "Send password reset email",
     "emailOrUsername": "Email or Username",
-    "username": "username",
+    "username": "Username",
     "password": "Password",
-    "email": "email"
+    "email": "Email",
+    "accountCreated": "Your account has been created.",
+    "loggingIn": "Logging you in..."
   },
   "error": {
     "invalidUsername": "Invalid Username",
-    "incorrectPassword": "Incorrect Password"
+    "incorrectPassword": "Incorrect Password",
+    "required": "is required for sure",
+    "error_00": "EN ERROR 00"
   }
 }

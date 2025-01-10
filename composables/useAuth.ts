@@ -1,10 +1,14 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { firestore } from "./firebase";
+
 interface Customer {
   //
 }
 
 interface Viewer {
-  firstName: "",
-  email: "",
+  firstName: "";
+  email: "";
   avatar: {
     url: "";
   };
@@ -34,8 +38,29 @@ export const useAuth = () => {
   };
 
   // Register the user
-  const registerUser = () => {
-    //
+  const registerUser = async (userInfo: {
+    email: string;
+    password: string;
+    username: string;
+  }) => {
+    try {
+      const registerResponse = await createUserWithEmailAndPassword(
+        auth,
+        userInfo.email,
+        userInfo.password
+      );
+
+      const user = registerResponse.user;
+
+      await setDoc(doc(firestore, "users", user.uid), {
+        email: user.email,
+        username: userInfo.username,
+      });
+
+      return { success: true, error: null };
+    } catch (error) {
+      return { success: false, error };
+    }
   };
 
   // Update the user state

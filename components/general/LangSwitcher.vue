@@ -12,8 +12,18 @@
 </template>
 
 <script setup>
+import { configure } from 'vee-validate';
+import { localize } from '@vee-validate/i18n';
+
 const { locales, locale, setLocaleCookie } = useI18n();
+
 watch(locale, (newLocale) => {
-	if (newLocale) setLocaleCookie(newLocale);
+	if (newLocale) {
+		setLocaleCookie(newLocale);
+		// change vee-validate localize
+		configure({
+			generateMessage: localize(newLocale),
+		});
+	}
 });
 </script>

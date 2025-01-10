@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<Head>
-			<Title>AnyStore | {{ product.title }}</Title>
+			<Title>AnyStore | {{ product.name }}</Title>
 			<Meta
 				name="description"
 				:content="product.description" />
@@ -16,13 +16,16 @@ definePageMeta({
 	layout: 'products',
 });
 
+const { $apiHandler } = useNuxtApp();
 const { productId } = useRoute().params;
-const uri = 'https://fakestoreapi.com/products/' + productId;
 
-//  fetch the products
-const { data: product } = await useFetch(uri, { key: productId });
+const data = await $apiHandler({
+  method: 'GET',
+  path: `products/${productId}`,
+})
 
-if (!product.value) {
+const product = data.value;
+if (!product) {
 	throw createError({ statusCode: 404, statusMessage: 'Product not found' });
 }
 </script>
