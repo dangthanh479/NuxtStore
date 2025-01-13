@@ -8,7 +8,7 @@ body {
 
 @layer components {
 	.dancing-font {
-		font-family: 'Dancing Script', cursive;
+		font-family: "Dancing Script", cursive;
 		font-optical-sizing: auto;
 	}
 	.text-primary {
@@ -63,6 +63,11 @@ body {
 
 		grid-template-columns: repeat(2, 1fr);
 	}
+	@media (min-width: 768px) {
+		.product-grid {
+			grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+		}
+	}
 	.product-card img {
 		@apply rounded-lg object-top object-cover w-full;
 		aspect-ratio: 1/1.125;
@@ -84,7 +89,7 @@ body {
 	.page-number {
 		@apply px-3;
 	}
-	.page-number[aria-current='page'] {
+	.page-number[aria-current="page"] {
 		@apply bg-primary border-primary border bg-opacity-10 text-primary z-10;
 	}
 }

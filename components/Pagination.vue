@@ -2,7 +2,7 @@
   <div class="flex justify-center mt-8 mb-16">
     <nav
       v-if="totalPages > 1"
-      class="inline-flex -space-x-px rounded-md shadow-sm"
+      class="inline-flex items-center"
       aria-label="Pagination"
     >
       <!-- PREVIOUS -->
@@ -13,10 +13,28 @@
         :class="{ 'cursor-not-allowed opacity-50': currentPage === 1 }"
         aria-label="Previous"
       >
-        <i class="fa-solid fa-chevron-left"></i>
+        Prev
       </NuxtLink>
 
-      <!-- PAGE NUMBERS -->
+      <!-- First page -->
+      <NuxtLink
+        v-if="showFirstPage"
+        :to="pageUrl(1)"
+        class="page-number"
+        :class="{ 'active': currentPage === 1 }"
+      >
+        1
+      </NuxtLink>
+
+      <!-- First ellipsis -->
+      <span
+        v-if="showFirstEllipsis"
+        class="ellipsis"
+      >
+        ...
+      </span>
+
+      <!-- Page numbers -->
       <NuxtLink
         v-for="pageNumber in visiblePages"
         :key="pageNumber"
@@ -28,6 +46,24 @@
         {{ pageNumber }}
       </NuxtLink>
 
+      <!-- Last ellipsis -->
+      <span
+        v-if="showLastEllipsis"
+        class="ellipsis"
+      >
+        ...
+      </span>
+
+      <!-- Last page -->
+      <NuxtLink
+        v-if="showLastPage"
+        :to="pageUrl(totalPages)"
+        class="page-number"
+        :class="{ 'active': currentPage === totalPages }"
+      >
+        {{ totalPages }}
+      </NuxtLink>
+
       <!-- NEXT -->
       <NuxtLink
         :to="nextPageUrl"
@@ -36,7 +72,7 @@
         :class="{ 'cursor-not-allowed opacity-50': currentPage === totalPages }"
         aria-label="Next"
       >
-        <i class="fa-solid fa-chevron-right"></i>
+        Next
       </NuxtLink>
     </nav>
   </div>
@@ -47,52 +83,68 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 
 interface Props {
-  totalPages: number; // Tổng số trang
-  currentPage: number; // Trang hiện tại
-  queryKey?: string; // Tên query key cho page (mặc định là "page")
-  siblingCount?: number; // Số lượng trang hiển thị xung quanh trang hiện tại
+  totalPages: number;
+  currentPage: number;
+  queryKey?: string;
+  siblingCount?: number;
 }
 
 const props = defineProps<Props>();
-
-
 const route = useRoute();
 
 const queryKey = props.queryKey || 'page';
-const siblingCount = props.siblingCount || 3;
+const siblingCount = props.siblingCount || 1; // Reduced sibling count for better UI
 
-// Lấy query hiện tại (trừ `page`)
+// Get current query params (except page)
 const otherQueryParams = computed(() => {
   const query = { ...route.query };
   delete query[queryKey];
   return query;
 });
 
-// Tạo URL cho một trang
-const pageUrl = (pageNumber: number) => {
-  return {
-    path: route.path,
-    query: { ...otherQueryParams.value, [queryKey]: pageNumber },
-  };
-};
+const visiblePages = computed(() => {
+  const total = props.totalPages;
+  const current = props.currentPage;
+  const siblings = siblingCount;
 
-// Tạo URL cho nút Previous
+  let startPage = Math.max(2, current - siblings);
+  let endPage = Math.min(total - 1, current + siblings);
+
+  // Adjust range if at the start or end
+  if (current <= siblings + 1) {
+    endPage = Math.min(siblings * 2 + 1, total - 1);
+  } else if (current >= total - siblings) {
+    startPage = Math.max(total - (siblings * 2), 2);
+  }
+
+  const pages = [];
+  for (let i = startPage; i <= endPage; i++) {
+    pages.push(i);
+  }
+  return pages;
+});
+
+// Show logic for first/last pages and ellipsis
+const showFirstPage = computed(() => visiblePages.value[0] > 1);
+const showLastPage = computed(() => visiblePages.value.at(-1)! < props.totalPages);
+const showFirstEllipsis = computed(() => visiblePages.value[0] > 2);
+const showLastEllipsis = computed(() => visiblePages.value.at(-1)! < props.totalPages - 1);
+
+// Create URL for a specific page
+const pageUrl = (pageNumber: number) => ({
+  path: route.path,
+  query: { ...otherQueryParams.value, [queryKey]: pageNumber },
+});
+
+// URLs for Previous/Next buttons
 const prevPageUrl = computed(() => {
   const prevPage = props.currentPage > 1 ? props.currentPage - 1 : 1;
   return pageUrl(prevPage);
 });
 
-// Tạo URL cho nút Next
 const nextPageUrl = computed(() => {
   const nextPage = props.currentPage < props.totalPages ? props.currentPage + 1 : props.totalPages;
   return pageUrl(nextPage);
-});
-
-// Hiển thị danh sách các trang (bao gồm sibling pages)
-const visiblePages = computed(() => {
-  const startPage = Math.max(1, props.currentPage - siblingCount);
-  const endPage = Math.min(props.totalPages, props.currentPage + siblingCount);
-  return Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i);
 });
 </script>
 
@@ -122,11 +174,19 @@ const visiblePages = computed(() => {
   color: #333;
 }
 
-.cursor-not-allowed {
-  pointer-events: none;
+.prev:hover,
+.next:hover,
+.page-number:hover {
+  background-color: #f8f9fa;
 }
 
-.opacity-50 {
-  opacity: 0.5;
+.page-number.active:hover {
+  background-color: #0056b3;
+}
+
+.ellipsis {
+  padding: 0 0.5rem;
+  font-size: 1rem;
+  color: #666;
 }
 </style>

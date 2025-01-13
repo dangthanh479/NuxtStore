@@ -3,11 +3,11 @@
 		<Transition name="slide-from-right">
 			<LazyCartSide v-if="isShowingCart" />
 		</Transition>
-		<LazyBannerSlide class="container mx-auto p-4" />
-		<LazyBrandLogo class="container mx-auto p-4" />
-		<LazyHomeSectionCategories class="container mx-auto p-4" />
-		<LazyHomeSectionTrendingNow class="container mx-auto p-4" />
-		<LazyHomeSectionNewProducts />
+		<BannerSlide class="container mx-auto p-4" />
+		<BrandLogo class="container mx-auto p-4" />
+		<HomeSectionCategories class="container mx-auto p-4" />
+		<HomeSectionTrendingNow class="container mx-auto p-4" />
+		<HomeSectionNewProducts />
 	</div>
 </template>
 

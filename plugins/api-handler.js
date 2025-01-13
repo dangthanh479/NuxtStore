@@ -4,7 +4,7 @@ export default defineNuxtPlugin(nuxtApp => {
 	const runtimeConfig = useRuntimeConfig();
 	const apiBaseUrl = runtimeConfig.public.apiBaseUrl;
 	
-	const apiHandler = async ({ method, path, body }) => {
+	const apiHandler = async ({ method, path, body, key }) => {
 		try {
 			const response = await useFetch(`${apiBaseUrl}/${path}`, {
 				method,
@@ -14,6 +14,7 @@ export default defineNuxtPlugin(nuxtApp => {
 					'Content-type': 'application/vnd.api+json',
 				},
 				body: body ? JSON.stringify(body) : undefined,
+				key,
 			});
 
 			if (!response.data.value || response.error.value) {

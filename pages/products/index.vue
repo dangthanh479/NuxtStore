@@ -20,6 +20,7 @@ const route = useRoute();
 const data = await $apiHandler({
 	method: 'GET',
 	path: `products`,
+	key: route.fullPath,
 });
 setProducts(data.value);
 
@@ -32,7 +33,8 @@ watch(
         const apiUrl = `products?${queryParams}`; // Append query string to path
         const newData = await $apiHandler({
           method: 'GET',
-          path: apiUrl, // Use constructed URL with query params
+					path: apiUrl, // Use constructed URL with query params
+					key: route.fullPath,
 				});
         setProducts(newData.value);
       } catch (error) {
@@ -42,7 +44,6 @@ watch(
   },
   { immediate: true }
 );
-
 
 useHead({
 	title: 'AnyStore | Products List',

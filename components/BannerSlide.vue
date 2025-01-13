@@ -27,7 +27,7 @@
 						<div class="opacity-70 mb-4">
 							{{ item.description }}
 						</div>
-						<div class="btn w-40 py-3 font-bold text-lg">Shop now</div>
+						<NuxtLink :to="`/products`" class="btn w-40 py-3 font-bold text-lg">Shop now</NuxtLink>
 					</div>
 				</div>
 			</Slide>
