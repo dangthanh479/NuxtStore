@@ -1,11 +1,6 @@
 <template>
 	<div class="container min-h-[600px]">
-		<!-- <div
-			v-if="showLoader || !cart"
-			class="flex flex-col min-h-[500px]">
-			<IconLoading class="m-auto" />
-		</div> -->
-		<LazyFormLoginAndRegister v-if="!viewer" />
+		<FormLoginAndRegister v-if="!user" />
 		<div
 			v-else
 			class="flex flex-col items-start justify-between w-full lg:gap-12 mb-24 lg:flex-row">
@@ -107,12 +102,14 @@
 </template>
 
 <script setup>
+
 const { logoutUser, viewer, customer, avatar } = useAuth();
-const { cart } = useCart();
+const authStore = useAuthStore();
+
+const user = authStore.user;
 const route = useRoute();
 
 const activeTab = computed(() => route.query.tab || 'my-details');
-const showLoader = computed(() => !viewer && !customer);
 
 useSeoMeta({
 	title: `My Account`,

@@ -73,6 +73,7 @@
     "invalidUsername": "Invalid Username",
     "incorrectPassword": "Incorrect Password",
     "required": "is required for sure",
-    "error_00": "EN ERROR 00"
+    "error_00": "EN ERROR 00",
+    "loginError": "Your credentials are incorrect"
   }
 }

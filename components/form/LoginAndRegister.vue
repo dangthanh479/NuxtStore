@@ -43,14 +43,14 @@
 		<Form
 			:validateOnInput="false"
 			class="mt-6"
-			@submit="handleFormSubmit()">
+			@submit="handleFormSubmit(userInfo)">
 			<FormInputValidate
 				v-if="formView === 'register' || formView === 'forgotPassword'"
 				id="email"
 				name="email"
 				v-model="userInfo.email"
 				:placeholder="inputPlaceholder.email"
-				:label="emailLabel"
+				:label="t('account.email')"
 				required
 				type="text"
 				rules="required|email" />
@@ -64,11 +64,11 @@
 			</p>
 			<div v-if="formView !== 'forgotPassword'">
 				<FormInputValidate
-					id="username"
-					name="username"
-					v-model="userInfo.username"
-					:placeholder="inputPlaceholder.username"
-					:label="usernameLabel"
+					id="email"
+					name="email"
+					v-model="userInfo.email"
+					:placeholder="inputPlaceholder.email"
+					:label="t('account.email')"
 					required
 					type="text"
 					rules="required" />
@@ -144,6 +144,7 @@ const route = useRoute();
 const router = useRouter();
 const { loginUser, isPending, registerUser, sendResetPasswordEmail } =
 	useAuth();
+const authStore = useAuthStore();
 const userInfo = ref({ email: '', password: '', username: '' });
 const formView = ref('login');
 const message = ref('');
@@ -161,27 +162,35 @@ const updateFormView = () => {
 
 watch(route, updateFormView, { immediate: true });
 
-const login = () => {
-	//
+const login = async (userInfo) => {
+  const { success, error } = await authStore.loginUser(userInfo);
+
+  if (success) {
+    errorMessage.value = '';
+    message.value = t('account.loggingIn');
+	} else {
+		errorMessage.value = t('error.loginError');
+		console.log(error, "error")
+	}
 };
 
-const handleFormSubmit = async () => {
-	console.log(userInfo.value);
-	return;
-	if (formView.value === 'register') {
-		const { success, error } = await registerUser(userInfo.value);
-		if (success) {
-			errorMessage.value = '';
-			message.value =
-				t('account.accountCreated') + ' ' + t('account.loggingIn');
-			resetForm();
-			setTimeout(() => {
-				login(userInfo);
-			}, 2000);
-		} else {
-			errorMessage.value = error;
-		}
-	}
+const handleFormSubmit = async (userInfo) => {
+  if (formView.value === 'register') {
+    const { success, error } = await registerUser(userInfo);
+    if (success) {
+      errorMessage.value = '';
+      message.value = t('account.accountCreated') + ' ' + t('account.loggingIn');
+      setTimeout(() => {
+        login(userInfo);
+      }, 2000);
+    } else {
+      errorMessage.value = error;
+    }
+  } else if (formView.value === 'forgotPassword') {
+    resetPassword(userInfo);
+  } else {
+    login(userInfo);
+  }
 };
 
 const resetPassword = () => {
@@ -219,16 +228,6 @@ const buttonText = computed(() => {
 	}
 });
 
-const emailLabel = computed(() =>
-	formView.value === 'register'
-		? t('account.email')
-		: t('account.emailOrUsername'),
-);
-const usernameLabel = computed(() =>
-	formView.value === 'login'
-		? t('account.emailOrUsername')
-		: t('account.username'),
-);
 const passwordLabel = computed(() => t('account.password'));
 
 const inputPlaceholder = computed(() => {

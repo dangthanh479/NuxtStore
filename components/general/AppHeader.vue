@@ -34,7 +34,6 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from '#vue-router';
 const { isShowingSearch } = useSearch();
 const { isShowingMobileMenu } = useHelpers();
 
